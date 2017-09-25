@@ -1,6 +1,10 @@
 package com.comp9322.AssignREST.model;
 
-public class RenewalNotices {
+import java.io.Serializable;
+
+import org.springframework.stereotype.Component;
+@Component
+public class RenewalNotices implements Serializable{
 	private int nid;
 	private String address;
 	private String contact_email;
