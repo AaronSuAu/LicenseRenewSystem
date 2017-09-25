@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.springframework.stereotype.Component;
 @Component
-public class RenewalNotices implements Serializable{
+public class RenewalNotices{
 	private int nid;
 	private String address;
 	private String contact_email;
