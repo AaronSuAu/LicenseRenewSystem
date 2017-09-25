@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.comp9322.AssignREST.dao.RenewalNoticeDao;
 import com.comp9322.AssignREST.model.RenewalNotices;
-import com.comp9322.AssignREST.response.RenewalNoticesResponse;
+import com.comp9322.AssignREST.response.JsonResponseList;
 import com.google.gson.Gson;
 
 @RestController
@@ -28,10 +28,11 @@ public class RenewalNoticeController {
 	public String create(@RequestBody RenewalNotices renewalNotices){
 		System.out.println("1");
 		renewalNoticeDao.create(renewalNotices);
-		RenewalNoticesResponse<RenewalNotices> response = new RenewalNoticesResponse<RenewalNotices>();
+		JsonResponseList<RenewalNotices> response = new JsonResponseList<RenewalNotices>();
 		response.setCode(200);
 		response.setDescription("success_operation");
 		List<RenewalNotices> list = new ArrayList<>();
+		list.add(renewalNotices);
 		response.setList(list);
 		Gson gson = new Gson();
 		String jsonString = gson.toJson(response);

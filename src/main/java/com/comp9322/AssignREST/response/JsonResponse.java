@@ -2,12 +2,9 @@ package com.comp9322.AssignREST.response;
 
 import java.util.List;
 
-import com.comp9322.AssignREST.model.RenewalNotices;
-
-public class RenewalNoticesResponse<T> {
+public class JsonResponse {
 	private int code;
 	private String description;
-	private List<T> list;
 	public int getCode() {
 		return code;
 	}
@@ -20,22 +17,14 @@ public class RenewalNoticesResponse<T> {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<T> getList() {
-		return list;
-	}
-	public void setList(List<T> list) {
-		this.list = list;
-	}
-	public RenewalNoticesResponse(int code, String description, List<T> list) {
+
+	public JsonResponse(int code, String description) {
 		super();
 		this.code = code;
 		this.description = description;
-		this.list = list;
 	}
-	public RenewalNoticesResponse() {
+	public JsonResponse() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 }
