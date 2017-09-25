@@ -111,8 +111,8 @@ public class RenewalNoticeController {
 		return gson.toJson(jsonResponse);
 	}
 	
-	@RequestMapping(value = "/token/{access_token}", method = RequestMethod.DELETE)
-	public String deleteNoticeByAccessToken(@PathVariable("access_token") String accessToken){
+	@RequestMapping(value = "/token/{token}", method = RequestMethod.DELETE)
+	public String deleteNoticeByAccessToken(@PathVariable("token") String accessToken){
 		List<RenewalNotices> list = renewalNoticeDao.getNoticesByAccessToken(accessToken);
 		if(list.size() == 0){
 			jsonResponse = new JsonResponse(404, "not_found");
