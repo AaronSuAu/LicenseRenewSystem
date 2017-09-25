@@ -40,6 +40,15 @@
         ],
         "summary": "Find all the renewal notices",
         "operationId": "getRenewalNotices",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "produces": [
           "aplication/json",
           "application/xml"
@@ -152,6 +161,13 @@
         ],
         "parameters": [
           {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "status",
             "in": "path",
             "description": "status of renewal notice to get",
@@ -192,6 +208,13 @@
           "application/xml"
         ],
         "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "nid",
             "in": "path",
@@ -245,12 +268,60 @@
         }
       }
     },
+    "/renewals/token/{token}": {
+      "get": {
+        "tags": [
+          "renewal_notice"
+        ],
+        "summary": "get renewal notice by access_token",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "access token of renewal notice to get",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation",
+            "schema": {
+              "$ref": "#/definitions/Renewal"
+            }
+          },
+          "404": {
+            "description": "not_found"
+          }
+        }
+      }
+    },
     "/payments": {
       "get": {
         "tags": [
           "payment"
         ],
         "summary": "Find all the payment records",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "produces": [
           "aplication/json",
           "application/xml"
@@ -361,6 +432,13 @@
         ],
         "parameters": [
           {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "pid",
             "in": "path",
             "description": "pid of payment to get",
@@ -388,6 +466,15 @@
           "car_licence"
         ],
         "summary": "Find all the car licence record",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "produces": [
           "aplication/json",
           "application/xml"
@@ -459,6 +546,13 @@
         ],
         "parameters": [
           {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "licid",
             "in": "path",
             "description": "licid of payment to get",
@@ -491,6 +585,13 @@
           "application/xml"
         ],
         "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "date",
             "in": "path",
