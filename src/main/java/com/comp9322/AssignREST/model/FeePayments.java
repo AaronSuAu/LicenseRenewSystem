@@ -3,7 +3,7 @@ package com.comp9322.AssignREST.model;
 import org.springframework.stereotype.Component;
 
 @Component
-public class fee_payments {
+public class FeePayments {
 	private int pid;
 	private int nid;
 	private int amount;
@@ -32,14 +32,14 @@ public class fee_payments {
 	public void setPaid_date(String paid_date) {
 		this.paid_date = paid_date;
 	}
-	public fee_payments(int pid, int nid, int amount, String paid_date) {
+	public FeePayments(int pid, int nid, int amount, String paid_date) {
 		super();
 		this.pid = pid;
 		this.nid = nid;
 		this.amount = amount;
 		this.paid_date = paid_date;
 	}
-	public fee_payments() {
+	public FeePayments() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

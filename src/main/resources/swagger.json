@@ -1,0 +1,612 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "version": "1.0.0",
+    "title": "Swagger Petstore",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "petstore.swagger.io",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "renewal_notice",
+      "description": "api about renewal notices"
+    },
+    {
+      "name": "payment",
+      "description": "api about payments"
+    },
+    {
+      "name": "car_licence",
+      "description": "api about car licence"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/renewals": {
+      "get": {
+        "tags": [
+          "renewal_notice"
+        ],
+        "summary": "Find all the renewal notices",
+        "operationId": "getRenewalNotices",
+        "produces": [
+          "aplication/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Renewal"
+              }
+            }
+          },
+          "404": {
+            "description": "not_found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "renewal_notice"
+        ],
+        "summary": "add new renewal notice",
+        "operationId": "addRenewalNotice",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Renewal object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Renewal"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation"
+          },
+          "405": {
+            "description": "invalid_input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "renewal_notice"
+        ],
+        "summary": "update the renewal notice",
+        "operationId": "updateRenewalNotice",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Renewal object that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Renewal"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation"
+          },
+          "405": {
+            "description": "invalid_input"
+          }
+        }
+      }
+    },
+    "/renewals/status/{status}": {
+      "get": {
+        "tags": [
+          "renewal_notice"
+        ],
+        "summary": "get renewal notice by status",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "path",
+            "description": "status of renewal notice to get",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "new",
+              "under_review",
+              "accepted",
+              "archived"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Renewal"
+              }
+            }
+          },
+          "404": {
+            "description": "not_found"
+          }
+        }
+      }
+    },
+    "/renewals/{nid}": {
+      "get": {
+        "tags": [
+          "renewal_notice"
+        ],
+        "summary": "get the renewal notice by id",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "nid",
+            "in": "path",
+            "description": "status of renewal notice to get",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation",
+            "schema": {
+              "$ref": "#/definitions/Renewal"
+            }
+          },
+          "404": {
+            "description": "not_found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "renewal_notice"
+        ],
+        "summary": "delete (archive) a renewal notice",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nid",
+            "in": "path",
+            "description": "status of renewal notice to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation"
+          },
+          "404": {
+            "description": "not_found"
+          }
+        }
+      }
+    },
+    "/payments": {
+      "get": {
+        "tags": [
+          "payment"
+        ],
+        "summary": "Find all the payment records",
+        "produces": [
+          "aplication/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Payment"
+              }
+            }
+          },
+          "404": {
+            "description": "not_found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "payment"
+        ],
+        "summary": "add new payment record",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "payment object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Payment"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation"
+          },
+          "405": {
+            "description": "invalid_input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "payment"
+        ],
+        "summary": "update the payment notice",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "payment object that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Payment"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation"
+          },
+          "405": {
+            "description": "invalid_input"
+          }
+        }
+      }
+    },
+    "/payments/{pid}": {
+      "get": {
+        "tags": [
+          "payment"
+        ],
+        "summary": "get the payment by id",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "description": "pid of payment to get",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation",
+            "schema": {
+              "$ref": "#/definitions/Payment"
+            }
+          },
+          "404": {
+            "description": "not_found"
+          }
+        }
+      }
+    },
+    "/licence": {
+      "get": {
+        "tags": [
+          "car_licence"
+        ],
+        "summary": "Find all the car licence record",
+        "produces": [
+          "aplication/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Licence"
+              }
+            }
+          },
+          "404": {
+            "description": "not_found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "car_licence"
+        ],
+        "summary": "update the car licence",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "the officer access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "licence object that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Payment"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation"
+          },
+          "405": {
+            "description": "invalid_input"
+          }
+        }
+      }
+    },
+    "/licence/{licid}": {
+      "get": {
+        "tags": [
+          "car_licence"
+        ],
+        "summary": "get the car licence record by id",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "licid",
+            "in": "path",
+            "description": "licid of payment to get",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation",
+            "schema": {
+              "$ref": "#/definitions/Licence"
+            }
+          },
+          "404": {
+            "description": "not_found"
+          }
+        }
+      }
+    },
+    "/licence/expiry/{date}": {
+      "get": {
+        "tags": [
+          "car_licence"
+        ],
+        "summary": "get the car licence record by expiry date",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "description": "expiry date of payment to get",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful_operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Licence"
+              }
+            }
+          },
+          "404": {
+            "description": "not_found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Renewal": {
+      "type": "object",
+      "properties": {
+        "nid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "access_token": {
+          "type": "string"
+        },
+        "licid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "address": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "review_result": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "description": "Renewal Status",
+          "enum": [
+            "new",
+            "under_review",
+            "accepted",
+            "archived",
+            "5yearsReview",
+            "fail"
+          ]
+        }
+      }
+    },
+    "Payment": {
+      "type": "object",
+      "properties": {
+        "pid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "nid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "paid_date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "Licence": {
+      "type": "object",
+      "properties": {
+        "licid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "driver_name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "licence_number": {
+          "type": "string"
+        },
+        "licence_class": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "expiry_date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

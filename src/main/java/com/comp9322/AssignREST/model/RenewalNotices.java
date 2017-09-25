@@ -1,6 +1,6 @@
 package com.comp9322.AssignREST.model;
 
-public class renewal_notices {
+public class RenewalNotices {
 	private int nid;
 	private String address;
 	private String contact_email;
@@ -50,7 +50,7 @@ public class renewal_notices {
 	public void setLicid(int licid) {
 		this.licid = licid;
 	}
-	public renewal_notices(int nid, String address, String contact_email, String status, String review_result,
+	public RenewalNotices(int nid, String address, String contact_email, String status, String review_result,
 			String access_token, int licid) {
 		super();
 		this.nid = nid;
@@ -61,7 +61,7 @@ public class renewal_notices {
 		this.access_token = access_token;
 		this.licid = licid;
 	}
-	public renewal_notices() {
+	public RenewalNotices() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

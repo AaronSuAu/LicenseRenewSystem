@@ -3,7 +3,7 @@ package com.comp9322.AssignREST.model;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Car_licenses {
+public class CarLicenses {
 	private int licid;
 	private String driver_name;
 	private String current_address;
@@ -53,7 +53,7 @@ public class Car_licenses {
 	public void setExpiry_date(String expiry_date) {
 		this.expiry_date = expiry_date;
 	}
-	public Car_licenses(int licid, String driver_name, String current_address, String license_number,
+	public CarLicenses(int licid, String driver_name, String current_address, String license_number,
 			String license_class, String contact_email, String expiry_date) {
 		super();
 		this.licid = licid;
@@ -64,7 +64,7 @@ public class Car_licenses {
 		this.contact_email = contact_email;
 		this.expiry_date = expiry_date;
 	}
-	public Car_licenses() {
+	public CarLicenses() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
