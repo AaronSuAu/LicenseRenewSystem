@@ -16,7 +16,7 @@ import com.comp9322.AssignREST.model.RenewalNotices;
 @Mapper
 @Repository
 public interface RenewalNoticeDao {
-	@Select("select * from renewal_notices")
+	@Select("select * from renewal_notices where status <> 'archived'")
 	List<RenewalNotices> getAll();
 	
 	@Insert("insert into renewal_notices (address, contact_email, "
@@ -31,15 +31,18 @@ public interface RenewalNoticeDao {
 			+ "access_token = #{access_token}, licid=#{licid} where nid=#{nid}")
 	int update(RenewalNotices renewalNotices);
 	
-	@Select("select * from renewal_notices where status = #{status}")
+	@Select("select * from renewal_notices where status = #{status} and status <> 'archived'")
 	List<RenewalNotices> getNoticesByStatus(@Param("status") String status);
 	
-	@Select("select * from renewal_notices where nid = #{nid}")
+	@Select("select * from renewal_notices where nid = #{nid} and status <> 'archived'")
 	List<RenewalNotices> getNoticesByNid(@Param("nid") int nid);
 	
 	@Delete("delete from renewal_notices where nid = #{nid}")
 	int deleteNoticesByNid(@Param("nid") int nid);
 	
-	@Select("select * from renewal_notices where access_token = #{access_token}")
+	@Select("select * from renewal_notices where access_token = #{access_token} and status <> 'archived'")
 	List<RenewalNotices> getNoticesByAccessToken(@Param("access_token") String accessToken);
+	
+	@Delete("delete from renewal_notices where nid != null")
+	int deleteAll();
 }
