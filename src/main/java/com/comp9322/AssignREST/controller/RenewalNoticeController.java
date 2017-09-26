@@ -28,7 +28,7 @@ public class RenewalNoticeController {
 	Gson gson = new Gson();
 	JsonResponseList<RenewalNotices> jsonResponseList;
 	JsonResponse jsonResponse;
-
+	//Get all the notice
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
 	public String getAll() {
 		List<RenewalNotices> list = renewalNoticeDao.getAll();
@@ -39,10 +39,8 @@ public class RenewalNoticeController {
 			jsonResponse = new JsonResponse(404, "not found");
 			return gson.toJson(jsonResponse);
 		}
-		
-
 	}
-
+	// Create a new notice
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public String create(@RequestBody RenewalNotices renewalNotices) {
 		String uniqueKey = UUID.randomUUID().toString();
@@ -50,6 +48,7 @@ public class RenewalNoticeController {
 			uniqueKey = UUID.randomUUID().toString();
 		}
 		renewalNotices.setAccess_token(uniqueKey);
+		renewalNotices.setStatus("new");
 		if(renewalNoticeDao.create(renewalNotices)==1){
 			jsonResponseList = new JsonResponseList<RenewalNotices>();
 			jsonResponseList.setCode(200);
@@ -64,7 +63,7 @@ public class RenewalNoticeController {
 			return gson.toJson(jsonResponse);
 		}
 	}
-
+	// update a notice
 	@RequestMapping(method = RequestMethod.PUT, produces = "application/json")
 	public String update(@RequestBody RenewalNotices renewalNotices) {
 		if (renewalNoticeDao.update(renewalNotices) == 1) {
@@ -77,8 +76,8 @@ public class RenewalNoticeController {
 			return gson.toJson(jsonResponse);
 		}
 	}
-
-	@RequestMapping(value = "/status/{status}", method = RequestMethod.GET)
+	//get notices by status
+	@RequestMapping(value = "/status/{status}", method = RequestMethod.GET, produces = "application/json")
 	public String getNoticesByStatus(@PathVariable("status") String status) {
 		List<RenewalNotices> list = renewalNoticeDao.getNoticesByStatus(status);
 		if(list.size() != 0){
@@ -89,7 +88,9 @@ public class RenewalNoticeController {
 			return gson.toJson(jsonResponse);
 		}
 	}
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	
+	//get notice by notice id
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
 	public String getNoticesByNid(@PathVariable("id") int nid){
 		List<RenewalNotices> list = renewalNoticeDao.getNoticesByNid(nid);
 		if(list.size() == 0){
@@ -100,8 +101,8 @@ public class RenewalNoticeController {
 			return gson.toJson(jsonResponseList);
 		}
 	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	// delete notice by notice id
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
 	public String deleteNoticeByNid(@PathVariable("id") int nid){
 		if(renewalNoticeDao.deleteNoticesByNid(nid)==0){
 			jsonResponse = new JsonResponse(404, "not_found");
@@ -110,9 +111,9 @@ public class RenewalNoticeController {
 		}
 		return gson.toJson(jsonResponse);
 	}
-	
-	@RequestMapping(value = "/token/{access_token}", method = RequestMethod.DELETE)
-	public String deleteNoticeByAccessToken(@PathVariable("access_token") String accessToken){
+	//get notice by access token
+	@RequestMapping(value = "/token/{token}", method = RequestMethod.GET, produces = "application/json")
+	public String getNoticeByAccessToken(@PathVariable("token") String accessToken){
 		List<RenewalNotices> list = renewalNoticeDao.getNoticesByAccessToken(accessToken);
 		if(list.size() == 0){
 			jsonResponse = new JsonResponse(404, "not_found");
@@ -122,4 +123,9 @@ public class RenewalNoticeController {
 			return gson.toJson(jsonResponseList);
 		}
 	}
+//	@RequestMapping(value = "/danger/delete", method = RequestMethod.DELETE)
+//	public String deleteDanger(){
+//		renewalNoticeDao.deleteAll();
+//		return "success";
+//	}
 }
