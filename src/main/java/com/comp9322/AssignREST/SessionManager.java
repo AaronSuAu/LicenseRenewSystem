@@ -7,15 +7,17 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 public class SessionManager implements HandlerInterceptor{
-
+	private final static String CLIENT_TOKEN="$2y$10$HnIpEBB9xgFQmUfDYWpvQenYRiBhr336VDRV.DOCd3OWMY8emf3o2";
+	private final static String OFFICER_TOKEN="o6RdxluHDu7fHBgpk9R2hBMLLfP6z74v9pnopAE0co5EuZflZgw9cXavJ3zL";
     // This method is called before the controller
     @Override
     public boolean preHandle(HttpServletRequest request,
             HttpServletResponse response, Object handler) throws Exception {
 
-        String xHeader = request.getHeader("authentication");
+        String xHeader = request.getHeader("Authorization");
         //boolean permission = true;
-        if(xHeader.equals("123456")) {
+        System.out.println(request.getRequestURI());
+        if(xHeader.equals("client")) {
             return true;
         }
         else {

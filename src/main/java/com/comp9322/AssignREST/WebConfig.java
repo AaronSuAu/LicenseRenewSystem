@@ -15,11 +15,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
          return new SessionManager();
     }
 
+    
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getSessionManager())
-        .addPathPatterns("/**");
-        //.excludePathPatterns("/states");
+//        registry.addInterceptor(getSessionManager())
+//        .addPathPatterns("/**");
+        //.excludePathPatterns("/renewals/**");
+        
+        
      // assuming you put your serve your static files with /resources/ mapping
      // and the pre login page is served with /login mapping
     }
