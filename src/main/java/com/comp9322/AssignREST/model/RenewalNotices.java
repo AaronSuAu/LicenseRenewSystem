@@ -12,6 +12,7 @@ public class RenewalNotices{
 	private String review_result;
 	private String access_token;
 	private int licid;
+	
 	public int getNid() {
 		return nid;
 	}
