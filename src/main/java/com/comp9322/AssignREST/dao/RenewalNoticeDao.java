@@ -20,9 +20,9 @@ public interface RenewalNoticeDao {
 	List<RenewalNotices> getAll();
 	
 	@Insert("insert into renewal_notices (address, contact_email, "
-			+ "status, review_result, access_token)values("
+			+ "status, review_result, access_token, licid)values("
 			+ "#{address}, #{contact_email}, #{status}, #{review_result}, "
-			+ "#{access_token})")
+			+ "#{access_token}, #{licid})")
 	@Options(useGeneratedKeys = true, keyProperty = "nid", keyColumn = "renewal_notice.nid")
 	int create(RenewalNotices renewalNotices);
 	
