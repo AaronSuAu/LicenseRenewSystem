@@ -1,5 +1,9 @@
 package com.comp9322.AssignREST;
 
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,28 +13,48 @@ import org.springframework.web.servlet.ModelAndView;
 public class SessionManager implements HandlerInterceptor{
 	private final static String CLIENT_TOKEN="$2y$10$HnIpEBB9xgFQmUfDYWpvQenYRiBhr336VDRV.DOCd3OWMY8emf3o2";
 	private final static String OFFICER_TOKEN="o6RdxluHDu7fHBgpk9R2hBMLLfP6z74v9pnopAE0co5EuZflZgw9cXavJ3zL";
+
     // This method is called before the controller
     @Override
     public boolean preHandle(HttpServletRequest request,
             HttpServletResponse response, Object handler) throws Exception {
-
+    		if(request.getHeader("authorization") == null){
+    			response.setStatus(401);
+            response.getWriter().append("authentication required");
+    			return false;
+    		}
         String xHeader = request.getHeader("Authorization");
         //boolean permission = true;
         System.out.println(request.getRequestURI());
-        if(xHeader.equals("client")) {
-            return true;
+        System.out.println(request.getMethod());
+        String url = request.getRequestURI();
+        String method = request.getMethod();
+        if(xHeader.equals(CLIENT_TOKEN)) {
+        		//
+        		if(method.equals("PUT")){
+            		Pattern pattern = Pattern.compile("/payments|/renewals|/licenses");
+        		    Matcher match = pattern.matcher(url);
+        		    if(match.find()){
+        		    		return true;
+        		    }
+        		}else if(method.equals("GET")){
+            		Pattern pattern = Pattern.compile("/payments/[0-9]+|/renewals/.*|/licenses/.*|/licenseNotice/token/.*");
+        		    Matcher match = pattern.matcher(url);
+        		    if(match.find()){
+        		    		return true;
+        		    }
+        		}
+        		response.setStatus(401);
+            response.getWriter().append("authentication required");
+            return false; 
         }
-        else {
-            response.setStatus(401);
+        else if(xHeader.equals(OFFICER_TOKEN)){
+            return true;
+        } else {
+        		response.setStatus(401);
             response.getWriter().append("authentication required");
             return false;
-            // Above code will send a 401 with no response body.
-            // If you need a 401 view, do a redirect instead of
-            // returning false.
-            // response.sendRedirect("/401"); // assuming you have a handler mapping for 401
-
         }
-        //return false;
     }
 
     @Override
