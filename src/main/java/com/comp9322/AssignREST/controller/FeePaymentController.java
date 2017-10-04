@@ -78,4 +78,15 @@ public class FeePaymentController {
 		}
 	}
 
+	@RequestMapping(value = "/nid/{nid}", method=RequestMethod.GET, produces = "application/json")
+	public String getPyamentByNid(@PathVariable("nid") int nid){
+		List<FeePayments> list = feePaymentDao.getPaymentsByNid(nid);
+		if(list.size() == 0){
+			return new Gson().toJson(new JsonResponse(404, "not_found"));
+		} else{
+			JsonResponseList<FeePayments> jsonResponseList = new JsonResponseList<>(200,
+					"successful_operation", list);
+			return new Gson().toJson(jsonResponseList);
+		}
+	}
 }

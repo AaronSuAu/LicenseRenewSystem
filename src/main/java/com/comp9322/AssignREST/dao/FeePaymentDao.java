@@ -37,6 +37,9 @@ public interface FeePaymentDao {
 	/*
 	 * update a payment
 	 */
-	@Update("update fee_payments set amount=#{amount}, paid_date=#{paid_date} where pid = #{pid} ")
+	@Update("update fee_payments set amount=#{amount}, paid_date=#{paid_date} where pid = #{pid}")
 	boolean updateReminderFlag(FeePayments payment);
+	
+	@Select("select * from fee_payments where nid = #{nid} and paid_date is NULL")
+	List<FeePayments> getPaymentsByNid(@Param("nid") int id);
 }
