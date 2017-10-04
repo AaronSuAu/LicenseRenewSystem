@@ -21,12 +21,7 @@ public interface RenewalNoticeDao {
 
 	@Insert("insert into renewal_notices (address, contact_email, "
 			+ "status, review_result, access_token, licid)values("
-<<<<<<< HEAD
 			+ "#{address}, #{contact_email}, #{status}, #{review_result}, " + "#{access_token}, " + "#{licid})")
-=======
-			+ "#{address}, #{contact_email}, #{status}, #{review_result}, "
-			+ "#{access_token}, #{licid})")
->>>>>>> e2b570b1bdfb72c26a864b677363e40c04b2c4b8
 	@Options(useGeneratedKeys = true, keyProperty = "nid", keyColumn = "renewal_notice.nid")
 	int create(RenewalNotices renewalNotices);
 
