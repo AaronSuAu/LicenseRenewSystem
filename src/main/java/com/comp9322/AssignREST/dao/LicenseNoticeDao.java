@@ -12,11 +12,16 @@ import com.comp9322.AssignREST.model.LicenseNotice;
 @Repository
 @Mapper
 public interface LicenseNoticeDao {
-	@Select("select car_licenses.licid, renewal_notices.nid, driver_name, license_number, "
+	@Select("with TA as (select car_licenses.licid, renewal_notices.nid, driver_name, license_number, "
 			+ "car_licenses.contact_email as email, car_licenses.current_address "
 			+ "as address, renewal_notices.status, license_class, "
 			+ "renewal_notices.review_result, expiry_date  from car_licenses "
-			+ "left join renewal_notices on car_licenses.licid = renewal_notices.licid where status is null or status <> 'archived'; ")
+			+ "left join renewal_notices on car_licenses.licid = renewal_notices.licid where status is null or status <> 'archived')"
+			+ " select car_licenses.licid, TA.nid, car_licenses.driver_name, car_licenses.license_number, "
+			+ "car_licenses.contact_email as email, car_licenses.current_address "
+			+ "as address, TA.status, car_licenses.license_class, "
+			+ "TA.review_result, car_licenses.expiry_date  from car_licenses left join"
+			+ " TA on car_licenses.licid = TA.licid; ")
 	public List<LicenseNotice> getAll();
 
 	@Select("select car_licenses.licid, renewal_notices.nid, driver_name, license_number, "
