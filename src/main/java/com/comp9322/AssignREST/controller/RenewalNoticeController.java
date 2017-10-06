@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.comp9322.AssignREST.dao.RenewalNoticeDao;
+import com.comp9322.AssignREST.model.RenewalNoticeHATEOS;
 import com.comp9322.AssignREST.model.RenewalNotices;
 import com.comp9322.AssignREST.response.JsonResponse;
 import com.comp9322.AssignREST.response.JsonResponseList;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 @RestController
 @RequestMapping("/renewals")
@@ -119,7 +121,12 @@ public class RenewalNoticeController {
 			jsonResponse = new JsonResponse(404, "not_found");
 			return gson.toJson(jsonResponse);
 		}else{
-			jsonResponseList = new JsonResponseList<>(200, "successful_operation", list);
+			List<RenewalNoticeHATEOS> resultList = new ArrayList<>();
+			RenewalNoticeHATEOS rHateos = new RenewalNoticeHATEOS(list.get(0));
+			rHateos.setLink("http://localhost:8090/licenses/"+list.get(0).getLicid());
+			resultList.add(rHateos);
+			JsonResponseList<RenewalNoticeHATEOS> jsonResponseList;
+			jsonResponseList = new JsonResponseList<>(200, "successful_operation", resultList);
 			return gson.toJson(jsonResponseList);
 		}
 	}
