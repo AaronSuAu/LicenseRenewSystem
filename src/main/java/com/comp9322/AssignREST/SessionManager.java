@@ -38,7 +38,8 @@ public class SessionManager implements HandlerInterceptor{
         		    		return true;
         		    }
         		}else if(method.equals("GET")){
-            		Pattern pattern = Pattern.compile("/payments/[0-9]+|/renewals/.*|/licenses/.*|/licenseNotice/token/.*");
+            		Pattern pattern = Pattern.compile("/payments/[0-9]+|/renewals/.*|/licenses/.*|/licenseNotice/token/.*"
+            				+ "|/payments/nid/[0-9]+");
         		    Matcher match = pattern.matcher(url);
         		    if(match.find()){
         		    		return true;
