@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.comp9322.AssignREST.response.JsonResponse;
+import com.google.gson.Gson;
+
 public class SessionManager implements HandlerInterceptor{
 	private final static String CLIENT_TOKEN="$2y$10$HnIpEBB9xgFQmUfDYWpvQenYRiBhr336VDRV.DOCd3OWMY8emf3o2";
 	private final static String OFFICER_TOKEN="o6RdxluHDu7fHBgpk9R2hBMLLfP6z74v9pnopAE0co5EuZflZgw9cXavJ3zL";
@@ -20,7 +23,7 @@ public class SessionManager implements HandlerInterceptor{
             HttpServletResponse response, Object handler) throws Exception {
     		if(request.getHeader("authorization") == null){
     			response.setStatus(401);
-            response.getWriter().append("authentication required");
+            response.getWriter().append(new Gson().toJson(new JsonResponse(401, "authentication_reuqired")));
     			return false;
     		}
         String xHeader = request.getHeader("Authorization");
@@ -46,14 +49,15 @@ public class SessionManager implements HandlerInterceptor{
         		    }
         		}
         		response.setStatus(401);
-            response.getWriter().append("authentication required");
+            response.getWriter().append(new Gson().toJson(new JsonResponse(401, "authentication_reuqired")));
+
             return false; 
         }
         else if(xHeader.equals(OFFICER_TOKEN)){
             return true;
         } else {
         		response.setStatus(401);
-            response.getWriter().append("authentication required");
+            response.getWriter().append(new Gson().toJson(new JsonResponse(401, "authentication_reuqired")));
             return false;
         }
     }
