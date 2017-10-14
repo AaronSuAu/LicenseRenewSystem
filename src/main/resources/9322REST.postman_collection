@@ -1,0 +1,324 @@
+{
+	"variables": [],
+	"info": {
+		"name": "9322REST",
+		"_postman_id": "23b389b5-9c9d-b3ea-165a-80f37f1547e8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Renewals GetAll",
+			"request": {
+				"url": "http://localhost:8090/renewals",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "o6RdxluHDu7fHBgpk9R2hBMLLfP6z74v9pnopAE0co5EuZflZgw9cXavJ3zL",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Renewal create notices",
+			"request": {
+				"url": "http://localhost:8080/renewals",
+				"method": "POST",
+				"header": [
+					{
+						"key": "authentication",
+						"value": "123456",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n            \"address\": \"3333\",\n            \"contact_email\": \"3\",\n            \"review_result\": \"5\",\n            \"licid\": \"0\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Renewal update notices",
+			"request": {
+				"url": "http://localhost:8090/renewals",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "$2y$10$HnIpEBB9xgFQmUfDYWpvQenYRiBhr336VDRV.DOCd3OWMY8emf3o2",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"nid\": 4,\n            \"address\": \"3\",\n            \"contact_email\": \"aaronlife.au@gmail.com\",\n            \"status\": \"new\",\n            \"review_result\": \"3\",\n            \"access_token\": \"3333\",\n            \"licid\": 3\n        }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Renewal get notices by status",
+			"request": {
+				"url": "http://localhost:8080/renewals/status/new",
+				"method": "GET",
+				"header": [
+					{
+						"key": "authentication",
+						"value": "123456",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n            \"address\": \"3333\",\n            \"contact_email\": \"3\",\n            \"review_result\": \"5\",\n            \"licid\": \"0\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Renewal get notices by nid",
+			"request": {
+				"url": "http://localhost:8080/renewals/2",
+				"method": "GET",
+				"header": [
+					{
+						"key": "authentication",
+						"value": "123456",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n            \"address\": \"3333\",\n            \"contact_email\": \"3\",\n            \"review_result\": \"5\",\n            \"licid\": \"0\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Renewal get notices by accessToken",
+			"request": {
+				"url": "http://localhost:8090/renewals/token/333",
+				"method": "GET",
+				"header": [
+					{
+						"key": "authentication",
+						"value": "123456",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n            \"address\": \"3333\",\n            \"contact_email\": \"3\",\n            \"review_result\": \"5\",\n            \"licid\": \"0\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Renewal delete notices by id",
+			"request": {
+				"url": "http://localhost:8080/renewals/2",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authentication",
+						"value": "123456",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n            \"address\": \"3333\",\n            \"contact_email\": \"3\",\n            \"review_result\": \"5\",\n            \"licid\": \"0\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get LN by Nid",
+			"request": {
+				"url": "http://localhost:8090/licenseNotice/nid/4",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get LN ",
+			"request": {
+				"url": "http://localhost:8090/licenseNotice/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get LN By token",
+			"request": {
+				"url": "http://localhost:8090/licenseNotice/token/4",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Payments create",
+			"request": {
+				"url": "http://localhost:8090/payments/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "o6RdxluHDu7fHBgpk9R2hBMLLfP6z74v9pnopAE0co5EuZflZgw9cXavJ3zL",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nid\":4,\n\t\"amount\":100,\n\t\"paid_date\":\"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "License getall",
+			"request": {
+				"url": "http://localhost:8090/licenses",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Payments get",
+			"request": {
+				"url": "http://localhost:8090/payments/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nid\":4,\n\t\"amount\":100,\n\t\"paid_date\":\"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "License get by licid",
+			"request": {
+				"url": "http://localhost:8090/licenses/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/data_service_root/class-and-type?&filter=quarter eq 1",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/data_service_root/class-and-type?&filter=quarter eq 1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"data_service_root",
+						"class-and-type"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "quarter eq 1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "",
+							"value": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
