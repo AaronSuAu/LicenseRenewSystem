@@ -158,7 +158,7 @@ public class FeePaymentController {
 				cal.setTime(startDate);
 				System.out.println("**************update expiry2");
 				System.out.println(rNotices.getStatus());
-				if (rNotices.getStatus().equals("validated")) {
+				if (rNotices.getStatus().equals("validated") ||rNotices.getStatus().equals("rejected")) {
 					cal.add(Calendar.YEAR, 1);
 				} else if (rNotices.getStatus().equals("accepted")) {
 					System.out.println("**************update expiry3");
